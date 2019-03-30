@@ -10,4 +10,16 @@ public class Hotel {
         this.price = price;
         this.imageId = imageId;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public int getImageId() {
+        return imageId;
+    }
 }
