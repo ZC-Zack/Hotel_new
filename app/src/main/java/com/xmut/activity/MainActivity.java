@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity  implements RadioGroup.OnChe
 
     public void setDefaultFragment(){
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.main_frame, chatFragment);
+        fragmentTransaction.replace(R.id.main_frame, homeFragment);
         fragmentTransaction.commit();
     }
 

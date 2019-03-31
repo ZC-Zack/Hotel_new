@@ -25,6 +25,7 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.ViewHolder> 
     private List<Hotel> hotelList;
 
 
+
     static class ViewHolder extends RecyclerView.ViewHolder{
         private CardView cardView;
         private ImageView hotelImage;

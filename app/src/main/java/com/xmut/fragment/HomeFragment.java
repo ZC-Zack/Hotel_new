@@ -1,5 +1,6 @@
 package com.xmut.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
@@ -20,19 +21,24 @@ public class HomeFragment extends Fragment {
     private View view;
     private List<Hotel> hotelList;
     private HotelAdapter hotelAdapter;
+    private RecyclerView recyclerView;
+    private GridLayoutManager gridLayoutManager;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup group, Bundle bundle){
         view = inflater.inflate(R.layout.home_layout, group, false);
         initHotel();
-        /*RecyclerView recyclerView = fi(R.id.recycle_view);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 1);*/
-        /*hotelAdapter = new HotelAdapter(hotelList);
-        recyclerView.setLayoutManager(gridLayoutManager);
-        recyclerView.setAdapter(hotelAdapter);*/
-
-
+        hotelAdapter = new HotelAdapter(hotelList);
+        initRecycleView();
         return  view;
+    }
+
+    public void initRecycleView(){
+        recyclerView = view.findViewById(R.id.hotel_recycle);
+        hotelAdapter = new HotelAdapter(hotelList);
+        gridLayoutManager = new GridLayoutManager(getContext(), 1);
+        recyclerView.setAdapter(hotelAdapter);
+        recyclerView.setLayoutManager(gridLayoutManager);
     }
 
     public void initHotel(){
