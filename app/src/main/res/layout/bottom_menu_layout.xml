@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <RadioGroup
+        android:id="@+id/bottom_group"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        android:background="@color/cardview_dark_background">
+
+        <RadioButton
+            android:id="@+id/home_btn"
+            android:checked="true"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:textAlignment="center"
+            android:button="@null"
+            android:text="首页"/>
+
+        <RadioButton
+            android:id="@+id/chat_btn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:textAlignment="center"
+            android:button="@null"
+            android:text="聊天"/>
+
+        <RadioButton
+            android:id="@+id/friend_btn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:textAlignment="center"
+            android:button="@null"
+            android:text="好友"/>
+
+    </RadioGroup>
+
+</LinearLayout>
