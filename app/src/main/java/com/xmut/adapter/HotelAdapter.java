@@ -24,8 +24,6 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.ViewHolder> 
 
     private List<Hotel> hotelList;
 
-
-
     static class ViewHolder extends RecyclerView.ViewHolder{
         private CardView cardView;
         private ImageView hotelImage;
@@ -46,7 +44,7 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.ViewHolder> 
     }
 
     @Override
-    public HotelAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if(context == null){
             context = parent.getContext();
         }
@@ -55,7 +53,7 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.ViewHolder> 
     }
 
     @Override
-    public void onBindViewHolder(HotelAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, int position) {
         Hotel hotel = hotelList.get(position);
         holder.hotelName.setText(hotel.getName());
         //holder.hotelPrice.setText((int) hotel.getPrice());

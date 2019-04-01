@@ -26,7 +26,7 @@ public class HomeFirstFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup group, Bundle bundle){
-        view = inflater.inflate(R.layout.home_layout, group, false);
+        view = inflater.inflate(R.layout.home_first_layout, group, false);
         initHotel();
         initRecycleView();
         return  view;
@@ -36,8 +36,8 @@ public class HomeFirstFragment extends Fragment {
         recyclerView = view.findViewById(R.id.hotel_recycle);
         hotelAdapter = new HotelAdapter(hotelList);
         gridLayoutManager = new GridLayoutManager(getContext(), 1);
-        //recyclerView.setAdapter(hotelAdapter);
-        //recyclerView.setLayoutManager(gridLayoutManager);
+        recyclerView.setAdapter(hotelAdapter);
+        recyclerView.setLayoutManager(gridLayoutManager);
     }
 
     public void initHotel(){
