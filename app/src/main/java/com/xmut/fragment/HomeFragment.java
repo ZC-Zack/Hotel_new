@@ -1,14 +1,14 @@
 package com.xmut.fragment;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.example.activity.R;
 import com.xmut.adapter.HotelAdapter;
@@ -24,9 +24,13 @@ public class HomeFragment extends Fragment {
     private RecyclerView recyclerView;
     private GridLayoutManager gridLayoutManager;
 
+    private Toolbar toolbar;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup group, Bundle bundle){
         view = inflater.inflate(R.layout.home_layout, group, false);
+        toolbar = view.findViewById(R.id.toolbar);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
         initHotel();
         hotelAdapter = new HotelAdapter(hotelList);
         initRecycleView();
