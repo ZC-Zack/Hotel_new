@@ -8,8 +8,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
-import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.example.activity.R;
+import com.xmut.ViewPager.NoScrollViewPager;
 import com.xmut.adapter.HomeFragmentAdapter;
 import com.xmut.fragment.ChatFragment;
 import com.xmut.fragment.FriendFragment;
@@ -25,6 +25,8 @@ public class MainActivity extends AppCompatActivity{
     private ViewPager viewPager;
     private MenuItem menuItem;
     List<Fragment> fragmentList;
+
+    private NoScrollViewPager noScrollViewPager;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,6 +75,9 @@ public class MainActivity extends AppCompatActivity{
     public void init(){
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         viewPager = findViewById(R.id.main_frame);
+       /* noScrollViewPager = (NoScrollViewPager)findViewById(R.id.main_frame);
+
+        noScrollViewPager.setScroll(false);*/
         fragmentList = new ArrayList<>();
         fragmentList.add(new HomeFragment());
         fragmentList.add(new ChatFragment());
