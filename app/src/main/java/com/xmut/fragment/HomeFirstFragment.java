@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 
 import com.example.activity.R;
 import com.xmut.adapter.HotelAdapter;
-import com.xmut.hotel.Hotel;
+import com.xmut.hotel.Room;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +19,7 @@ import java.util.List;
 public class HomeFirstFragment extends Fragment {
 
     private View view;
-    private List<Hotel> hotelList;
+    private List<Room> roomList;
     private HotelAdapter hotelAdapter;
     private RecyclerView recyclerView;
     private GridLayoutManager gridLayoutManager;
@@ -34,7 +34,7 @@ public class HomeFirstFragment extends Fragment {
 
     public void initRecycleView(){
         recyclerView = view.findViewById(R.id.hotel_recycle);
-        hotelAdapter = new HotelAdapter(hotelList);
+        hotelAdapter = new HotelAdapter(roomList);
         gridLayoutManager = new GridLayoutManager(getContext(), 1);
         recyclerView.setAdapter(hotelAdapter);
         recyclerView.setLayoutManager(gridLayoutManager);
@@ -42,13 +42,13 @@ public class HomeFirstFragment extends Fragment {
 
     public void initHotel(){
 
-        Hotel hotel = new Hotel("测试", 100, R.drawable.room);
-        hotelList = new ArrayList<>();
-        hotelList.clear();
-        hotelList.add(hotel);
-        hotelList.add(hotel);
-        hotelList.add(hotel);
-        hotelList.add(hotel);
-        hotelList.add(hotel);
+        Room room = new Room("测试", 100, R.drawable.room);
+        roomList = new ArrayList<>();
+        roomList.clear();
+        roomList.add(room);
+        roomList.add(room);
+        roomList.add(room);
+        roomList.add(room);
+        roomList.add(room);
     }
 }
