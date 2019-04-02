@@ -22,5 +22,8 @@ public class GetData {
             e.printStackTrace();
         }
     }
+    public List<Room> getRoom(String data){
+        return null;
+    }
 
 }

@@ -26,6 +26,7 @@ public class ConnectionControl {
             preparedStatement = connection.prepareStatement(sql);
             resultSet = preparedStatement.executeQuery();
             return  resultSet;
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
