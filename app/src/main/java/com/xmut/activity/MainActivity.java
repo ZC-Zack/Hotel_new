@@ -1,5 +1,6 @@
 package com.xmut.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity{
     private ViewPager viewPager;
     private MenuItem menuItem;
     List<Fragment> fragmentList;
+    private Intent intent;
 
     private NavigationView navigationView;
 
@@ -101,7 +103,8 @@ public class MainActivity extends AppCompatActivity{
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.order:
-                        Toast.makeText(MainActivity.this, "test", Toast.LENGTH_SHORT).show();
+                        intent = new Intent(MainActivity.this, OrderActivity.class);
+                        startActivity(intent);
                         return true;
                     case R.id.unused:
                         Toast.makeText(MainActivity.this, "test", Toast.LENGTH_SHORT).show();
