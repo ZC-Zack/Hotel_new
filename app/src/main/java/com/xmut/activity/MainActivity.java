@@ -3,13 +3,14 @@ package com.xmut.activity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.activity.R;
-import com.xmut.ViewPager.NoScrollViewPager;
 import com.xmut.adapter.HomeFragmentAdapter;
 import com.xmut.fragment.ChatFragment;
 import com.xmut.fragment.FriendFragment;
@@ -26,12 +27,13 @@ public class MainActivity extends AppCompatActivity{
     private MenuItem menuItem;
     List<Fragment> fragmentList;
 
-    private NoScrollViewPager noScrollViewPager;
+    private NavigationView navigationView;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         init();
+        initNavView();
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener(){
 
@@ -87,5 +89,33 @@ public class MainActivity extends AppCompatActivity{
         viewPager.setCurrentItem(0);
     }
 
+    public void initNavView(){
+        navigationView = findViewById(R.id.nav_view);
+        /*navigationView.setCheckedItem(R.id.order);
+        navigationView.setCheckedItem(R.id.unused);
+        navigationView.setCheckedItem(R.id.pay);
+        navigationView.setCheckedItem(R.id.comment);*/
+
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.order:
+                        Toast.makeText(MainActivity.this, "test", Toast.LENGTH_SHORT).show();
+                        return true;
+                    case R.id.unused:
+                        Toast.makeText(MainActivity.this, "test", Toast.LENGTH_SHORT).show();
+                        return true;
+                    case R.id.pay:
+                        Toast.makeText(MainActivity.this, "test", Toast.LENGTH_SHORT).show();
+                        return true;
+                    case R.id.comment:
+                        Toast.makeText(MainActivity.this, "test", Toast.LENGTH_SHORT).show();
+                        return true;
+                }
+                return false;
+            }
+        });
+    }
 
 }

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/order"
+            android:checkable="true"
+            android:title="我的订单"/>
+        <item
+            android:id="@+id/pay"
+            android:checkable="true"
+            android:title="待付款"/>
+        <item
+            android:id="@+id/unused"
+            android:checkable="true"
+            android:title="待使用"/>
+        <item
+            android:id="@+id/comment"
+            android:checkable="true"
+            android:title="待评价"/>
+    </group>
+
+
+
+</menu>

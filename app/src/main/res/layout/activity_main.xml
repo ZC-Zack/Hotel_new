@@ -4,13 +4,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    >
 
-    <!--<android.support.design.widget.CoordinatorLayout
+    <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
-        &lt;!&ndash;<android.support.design.widget.AppBarLayout
+        <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -20,17 +21,10 @@
                 android:layout_height="?attr/actionBarSize"
                 android:background="?attr/colorPrimary"
                 android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
-        </android.support.design.widget.AppBarLayout>&ndash;&gt;
-    </android.support.design.widget.CoordinatorLayout>-->
-
-    <android.support.design.widget.NavigationView
-        android:id="@+id/nav_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="left"
-        app:menu="@menu/nav_menu"
-        app:headerLayout="@layout/nav_header"/>
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                app:layout_scrollFlags="scroll|enterAlways|snap"/>
+        </android.support.design.widget.AppBarLayout>
+    </android.support.design.widget.CoordinatorLayout>
 
     <!--底部导航-->
     <LinearLayout
@@ -42,7 +36,7 @@
             android:id="@+id/main_frame"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
 
         <View
             android:layout_width="match_parent"
@@ -66,4 +60,12 @@
         </LinearLayout>
     </LinearLayout>
 
+    <!--侧滑栏-->
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="left"
+        app:menu="@menu/main_menu"
+        app:headerLayout="@layout/main_header"/>
 </android.support.v4.widget.DrawerLayout>
