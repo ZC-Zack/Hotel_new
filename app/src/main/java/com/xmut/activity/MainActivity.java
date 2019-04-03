@@ -1,5 +1,6 @@
 package com.xmut.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -12,9 +13,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -29,7 +33,7 @@ import com.xmut.fragment.HomeFragment;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity  implements RadioGroup.OnCheckedChangeListener  {
+public class MainActivity extends AppCompatActivity  implements RadioGroup.OnCheckedChangeListener {
 
     private DrawerLayout drawerLayout;
     private RadioGroup bottemRadio;
@@ -51,7 +55,7 @@ public class MainActivity extends AppCompatActivity  implements RadioGroup.OnChe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         init();
         setDefaultFragment();
@@ -60,9 +64,9 @@ public class MainActivity extends AppCompatActivity  implements RadioGroup.OnChe
     }
 
     /*
-    * 导航所有的按钮
-    * */
-    public void init(){
+     * 导航所有的按钮
+     * */
+    public void init() {
 
 
         bottomFrame = new ArrayList<Fragment>();
@@ -93,12 +97,27 @@ public class MainActivity extends AppCompatActivity  implements RadioGroup.OnChe
 
 
     /*
-    * 侧边栏
-    * */
-    public boolean onCreateOptionsMenu(Menu menu){
+     * 侧边栏
+     * */
+    public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.logoff, menu);
+        LayoutInflater factory = LayoutInflater.from(MainActivity.this);
+        View layout = factory.inflate(R.layout.nav_header, null);
+        Button loginButton = (Button) findViewById(R.id.login_Button);
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+
+        });
         return true;
     }
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
@@ -109,6 +128,7 @@ public class MainActivity extends AppCompatActivity  implements RadioGroup.OnChe
         }
         return true;
     }
+
 
     public void setDefaultFragment(){
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();

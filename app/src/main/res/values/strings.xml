@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Hotel</string>
+    <string name="title_activity_side_slipping">SideSlipping</string>
+    <string name="title_activity_sides_slipping">SidesSlipping</string>
 </resources>
