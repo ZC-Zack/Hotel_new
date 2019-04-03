@@ -13,13 +13,13 @@ import com.xmut.fragment.HomeFragment;
 
 import java.util.List;
 
-public class HomeFragmentPagerAdapter extends FragmentStatePagerAdapter {
+public class HomeFragmentAdapter extends FragmentStatePagerAdapter {
     private final int PAGER_COUNT = 3;
 
     List<Fragment> fragmentList;
     FragmentManager fragmentManager;
 
-    public HomeFragmentPagerAdapter(FragmentManager fragmentManager, List<Fragment> fragmentList){
+    public HomeFragmentAdapter(FragmentManager fragmentManager, List<Fragment> fragmentList){
         super(fragmentManager);
         this.fragmentList = fragmentList;
         this.fragmentManager = fragmentManager;

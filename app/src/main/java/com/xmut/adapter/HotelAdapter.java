@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.activity.R;
-import com.xmut.hotel.Hotel;
+import com.xmut.hotel.Room;
 
 import java.util.List;
 
@@ -22,9 +22,7 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.ViewHolder> 
 
     private Context context;
 
-    private List<Hotel> hotelList;
-
-
+    private List<Room> roomList;
 
     static class ViewHolder extends RecyclerView.ViewHolder{
         private CardView cardView;
@@ -41,12 +39,12 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.ViewHolder> 
         }
     }
 
-    public HotelAdapter(List<Hotel> hotelList){
-        this.hotelList = hotelList;
+    public HotelAdapter(List<Room> roomList){
+        this.roomList = roomList;
     }
 
     @Override
-    public HotelAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if(context == null){
             context = parent.getContext();
         }
@@ -55,15 +53,15 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.ViewHolder> 
     }
 
     @Override
-    public void onBindViewHolder(HotelAdapter.ViewHolder holder, int position) {
-        Hotel hotel = hotelList.get(position);
-        holder.hotelName.setText(hotel.getName());
+    public void onBindViewHolder(ViewHolder holder, int position) {
+        Room room = roomList.get(position);
+        holder.hotelName.setText(room.getName());
         //holder.hotelPrice.setText((int) hotel.getPrice());
-        Glide.with(context).load(hotel.getImageId()).into(holder.hotelImage);
+        Glide.with(context).load(room.getImageId()).into(holder.hotelImage);
     }
 
     @Override
     public int getItemCount() {
-        return hotelList.size();
+        return roomList.size();
     }
 }

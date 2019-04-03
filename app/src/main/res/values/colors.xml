@@ -322,4 +322,6 @@
     <!--海军色 -->
     <color name="black">#000000</color>
     <!--黑色 -->
+    <color name="tab_checked">#ED6A2C</color>
+    <color name="tab_unchecked">#757575</color>
 </resources>
