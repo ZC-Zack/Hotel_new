@@ -11,7 +11,7 @@ public class ConnectionControl {
     private PreparedStatement preparedStatement;
     private ResultSet resultSet;
 
-    private String url="jdbc:mysql://localhost:3306/hotel";
+    private String url="jdbc:mysql://118.24.221.92:3306/hotel";
     private String username = "root", password = "root";
     private String sql = "SELECT * FROM ";
 

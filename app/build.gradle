@@ -35,4 +35,6 @@ dependencies {
     implementation 'com.ashokvarma.android:bottom-navigation-bar:2.0.5'
     implementation files('libs/mysql-connector-java-5.0.8-bin.jar')
     implementation files('libs/ojdbc14.jar')
+    implementation 'com.google.code.gson:gson:2.7'
+    implementation 'com.alibaba:fastjson:1.1.54.android'
 }
