@@ -27,7 +27,7 @@ public class LoginActivity extends AppCompatActivity {
         accountEdit=(EditText)findViewById(R.id.account);
         passwordEdit=(EditText)findViewById(R.id.password);
         rememberPass=(CheckBox)findViewById(R.id.remember_pass);
-        login=(Button)findViewById(R.id.login);
+        login=(Button)findViewById(R.id.act_login_phone_loginBut);
         boolean isRemember=pref.getBoolean("remember_password",false);
         if(isRemember){
             String account=pref.getString("account","");
