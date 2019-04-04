@@ -5,11 +5,6 @@ public class Room {
     private double price;
     private int imageId;
 
-    public Room(String name, double price, int imageId){
-        this.name = name;
-        this.price = price;
-        this.imageId = imageId;
-    }
 
     public void setName(String name) {
         this.name = name;
