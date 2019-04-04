@@ -64,7 +64,6 @@ public class HomeFirstFragment extends Fragment {
             }
         }).start();
 
-
     }
     private void showResponse(final List<Room> list){
         getActivity().runOnUiThread(new Runnable() {

@@ -15,8 +15,7 @@ public class HttpConnection {
     private StringBuilder response;
     private InputStream in;
 
-    private String urlController = "http://192.168.43.203:8080/";
-    private String urlControllerOnline = "http://192.168.43.203:8080/";
+    private String urlController = "http://192.168.155.1:8080/";
 
     private static final String TGL="test";
     public String getTable(String data){
@@ -34,7 +33,7 @@ public class HttpConnection {
                 response.append(line);
             }
         }catch (Exception e){
-            Log.i(TGL,e.toString());
+            //Log.i(TGL,e.toString());
             e.printStackTrace();
         }
 

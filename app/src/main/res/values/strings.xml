@@ -2,4 +2,5 @@
     <string name="app_name">Hotel</string>
     <string name="title_activity_side_slipping">SideSlipping</string>
     <string name="title_activity_sides_slipping">SidesSlipping</string>
+    <string name="web">http://192.168.155.1:8080/</string>
 </resources>
