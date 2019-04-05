@@ -13,8 +13,14 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Layout;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.activity.R;
@@ -36,10 +42,9 @@ public class MainActivity extends AppCompatActivity{
     List<Fragment> fragmentList;
     private Intent intent;
 
-    private DrawerLayout drawerLayout;
-    private ActionBar actionBar;
     private NavigationView navigationView;
     private Toolbar toolbar;
+    private Button login_btn;
 
     private SharedPreferences.Editor user;
 
@@ -89,6 +94,14 @@ public class MainActivity extends AppCompatActivity{
 
             }
         });
+
+        login_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     public void init(){
@@ -106,6 +119,7 @@ public class MainActivity extends AppCompatActivity{
         viewPager.setCurrentItem(0);
     }
 
+    //侧滑栏图标
     private void initSlideMenu(){
         DrawerLayout drawer =  findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -120,7 +134,9 @@ public class MainActivity extends AppCompatActivity{
         navigationView.setCheckedItem(R.id.unused);
         navigationView.setCheckedItem(R.id.pay);
         navigationView.setCheckedItem(R.id.comment);*/
-
+        View view = LayoutInflater.from(this).inflate(R.layout.main_header, null);
+        login_btn = view.findViewById(R.id.login_button);
+        //Log.i("tof", "login_btn: " + login_btn);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
