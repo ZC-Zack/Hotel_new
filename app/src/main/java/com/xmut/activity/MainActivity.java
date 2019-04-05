@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity{
         setSupportActionBar(toolbar);
         init();
         initNavView();
-        initSlideMenu();
+        //initSlideMenu();
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener(){
 
