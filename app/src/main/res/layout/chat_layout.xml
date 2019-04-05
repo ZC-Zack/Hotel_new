@@ -6,93 +6,29 @@
     android:layout_height="match_parent"
     android:background="#FFF">
 
-    <FrameLayout
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/chat_recycle"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    <TextView
-        android:id="@+id/chat_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="聊天"
-        android:layout_gravity="center"
-        android:textSize="20sp"/>
-    <TextView
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="聊天"
-        android:layout_gravity="center"
-        android:textSize="20sp"/>
-    <TextView
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="聊天"
-    android:layout_gravity="center"
-    android:textSize="20sp"/>
-    <TextView
+        <EditText
+            android:id="@+id/input_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:maxLines="2"/>
 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="聊天"
-        android:layout_gravity="center"
-        android:textSize="20sp"/>
-    <TextView
+        <Button
+            android:id="@+id/send_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="发送"/>
 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="聊天"
-        android:layout_gravity="center"
-        android:textSize="20sp"/>
-    <TextView
-
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="聊天"
-        android:layout_gravity="center"
-        android:textSize="20sp"/>
-    <TextView
-
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="聊天"
-        android:layout_gravity="center"
-        android:textSize="20sp"/>
-    <TextView
-
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="聊天"
-        android:layout_gravity="center"
-        android:textSize="20sp"/>
-    <TextView
-
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="聊天"
-        android:layout_gravity="center"
-        android:textSize="20sp"/>
-    <TextView
-
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="聊天"
-        android:layout_gravity="center"
-        android:textSize="20sp"/>
-    <TextView
-
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="聊天"
-        android:layout_gravity="center"
-        android:textSize="20sp"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="聊天"
-        android:layout_gravity="center"
-        android:textSize="20sp"/>
-
-    </FrameLayout>
+    </LinearLayout>
 
 </LinearLayout>
