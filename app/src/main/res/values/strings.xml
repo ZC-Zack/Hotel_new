@@ -3,4 +3,6 @@
     <string name="title_activity_side_slipping">SideSlipping</string>
     <string name="title_activity_sides_slipping">SidesSlipping</string>
     <string name="web">http://192.168.155.1:8080/</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 </resources>

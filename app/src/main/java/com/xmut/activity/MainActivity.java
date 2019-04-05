@@ -9,8 +9,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -45,7 +47,9 @@ public class MainActivity extends AppCompatActivity{
         setSupportActionBar(toolbar);
         init();
         initNavView();
-        //initSlideMenu();
+        initSlideMenu();
+
+
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener(){
 
@@ -102,12 +106,11 @@ public class MainActivity extends AppCompatActivity{
     }
 
     private void initSlideMenu(){
-        drawerLayout = findViewById(R.id.drawer_layout);
-        actionBar = getSupportActionBar();
-        if(actionBar != null){
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setHomeAsUpIndicator(R.drawable.men);
-        }
+        DrawerLayout drawer =  findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
     }
 
     public void initNavView(){
@@ -140,4 +143,23 @@ public class MainActivity extends AppCompatActivity{
         });
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.toolbar, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.logoff_btn:{
+                Toast.makeText(this, "退出", Toast.LENGTH_LONG).show();
+                break;
+            }
+            case R.id.add_friend:
+                Toast.makeText(this, "添加好友", Toast.LENGTH_LONG).show();
+                break;
+        }
+        return true;
+    }
 }

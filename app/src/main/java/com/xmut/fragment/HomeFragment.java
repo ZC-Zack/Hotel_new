@@ -4,8 +4,6 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,13 +23,10 @@ public class HomeFragment extends Fragment implements TabLayout.OnTabSelectedLis
     private List<Fragment> list;
     private String[] titles = {"酒店", "待定"};
 
-    private Toolbar toolbar;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup group, Bundle bundle){
         view = inflater.inflate(R.layout.home_layout, group, false);
-        toolbar = view.findViewById(R.id.toolbar);
-        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
         init();
         return  view;
     }
