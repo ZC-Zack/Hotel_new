@@ -11,19 +11,15 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.activity.R;
 import com.xmut.adapter.HomeFragmentAdapter;
-import com.xmut.dao.jdbc.ConnectionControl;
 import com.xmut.fragment.ChatFragment;
 import com.xmut.fragment.FriendFragment;
 import com.xmut.fragment.HomeFragment;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
