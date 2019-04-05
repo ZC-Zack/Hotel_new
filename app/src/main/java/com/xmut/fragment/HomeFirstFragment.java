@@ -13,6 +13,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.example.activity.R;
 import com.xmut.adapter.HotelAdapter;
 import com.xmut.drawUI.HttpConnection;
+import com.xmut.drawUI.OkHttpConnection;
 import com.xmut.hotel.Room;
 
 import java.util.List;
@@ -27,6 +28,7 @@ public class HomeFirstFragment extends Fragment {
     private GridLayoutManager gridLayoutManager;
 
     private HttpConnection httpConnection;
+    private OkHttpConnection okHttpConnection;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup group, Bundle bundle){
         view = inflater.inflate(R.layout.home_first_layout, group, false);
@@ -46,8 +48,10 @@ public class HomeFirstFragment extends Fragment {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                httpConnection = new HttpConnection();
-                String response = httpConnection.getTable("room");
+                /*httpConnection = new HttpConnection();
+                String response = httpConnection.getTable("room");*/
+                okHttpConnection = new OkHttpConnection();
+                String response = okHttpConnection.getData("room");
                 roomList = JSONArray.parseArray(response, Room.class);
                 //Log.i("test", "roomList " + roomList.get(0).toString());
                 final Room room = new Room();

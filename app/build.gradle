@@ -37,4 +37,5 @@ dependencies {
     implementation files('libs/ojdbc14.jar')
     implementation 'com.google.code.gson:gson:2.7'
     implementation 'com.alibaba:fastjson:1.1.54.android'
+    implementation 'com.squareup.okhttp3:okhttp:3.4.1'
 }

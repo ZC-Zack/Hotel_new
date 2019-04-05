@@ -1,6 +1,7 @@
 package com.xmut.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -40,17 +41,17 @@ public class MainActivity extends AppCompatActivity{
     private NavigationView navigationView;
     private Toolbar toolbar;
 
+    private SharedPreferences.Editor user;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        initUser();
         init();
         initNavView();
         initSlideMenu();
-
-
-
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener(){
 
             @Override
@@ -157,9 +158,19 @@ public class MainActivity extends AppCompatActivity{
                 break;
             }
             case R.id.add_friend:
-                Toast.makeText(this, "添加好友", Toast.LENGTH_LONG).show();
+                intent = new Intent(MainActivity.this, AddFriendActivity.class);
+                startActivity(intent);
                 break;
         }
         return true;
     }
+
+    private void initUser(){
+        user = getSharedPreferences("user", MODE_PRIVATE).edit();
+        user.putString("userId", "18650406827");
+        user.putString("userName", "测试");
+        user.putString("sex", "男");
+        user.apply();
+    }
+
 }
