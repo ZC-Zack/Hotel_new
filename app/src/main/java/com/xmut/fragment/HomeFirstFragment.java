@@ -49,7 +49,7 @@ public class HomeFirstFragment extends Fragment {
                 httpConnection = new HttpConnection();
                 String response = httpConnection.getTable("room");
                 roomList = JSONArray.parseArray(response, Room.class);
-                Log.i("test", "roomList " + roomList.get(0).toString());
+                //Log.i("test", "roomList " + roomList.get(0).toString());
                 final Room room = new Room();
                 room.setName("测试");
                 room.setImageId(R.drawable.room);
