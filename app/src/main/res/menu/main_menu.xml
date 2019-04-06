@@ -5,19 +5,23 @@
         <item
             android:id="@+id/order"
             android:checkable="true"
-            android:title="我的订单"/>
+            android:title="我的订单"
+            android:icon="@drawable/home_order_nor"/>
         <item
             android:id="@+id/pay"
             android:checkable="true"
-            android:title="待付款"/>
+            android:title="待付款"
+            android:icon="@drawable/yu_e"/>
         <item
             android:id="@+id/unused"
             android:checkable="true"
-            android:title="待使用"/>
+            android:title="待使用"
+            android:icon="@drawable/home_order_sel"/>
         <item
             android:id="@+id/comment"
             android:checkable="true"
-            android:title="待评价"/>
+            android:title="待评价"
+            android:icon="@drawable/used"/>
     </group>
 
 
