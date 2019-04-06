@@ -1,5 +1,6 @@
 package com.xmut.fragment;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
@@ -8,28 +9,40 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.example.activity.R;
 import com.xmut.adapter.FriendAdapter;
+import com.xmut.drawUI.OkHttpConnection;
+import com.xmut.hotel.ApplyUser;
 import com.xmut.hotel.Friend;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class FriendFragment extends Fragment {
     private View view;
     private RecyclerView recyclerView;
     private FriendAdapter friendAdapter;
     private GridLayoutManager gridLayoutManager;
+
     private List<Friend> friendList;
+    private OkHttpConnection okHttpConnection;
+    private SharedPreferences preferences;
+    private JSONObject json;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup group, Bundle bundle){
         view = inflater.inflate(R.layout.friend_layout, group, false);
+        recyclerView = view.findViewById(R.id.friend_recycle);
+        okHttpConnection = new OkHttpConnection();
+        init();
         initFriend();
         return  view;
     }
     private void initRecycleView(List<Friend> friendList){
-        recyclerView = view.findViewById(R.id.friend_recycle);
         friendAdapter = new FriendAdapter(friendList);
         gridLayoutManager = new GridLayoutManager(getContext(), 1);
         recyclerView.setAdapter(friendAdapter);
@@ -41,24 +54,11 @@ public class FriendFragment extends Fragment {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                Friend friend1 = new Friend();
-                friend1.setUserId("131312321");
-                friend1.setUsername("测试");
-                friend1.setImageId(R.drawable.men);
-                Friend friend2 = new Friend();
-                friend2.setUserId("131312321");
-                friend2.setUsername("测试");
-                friend2.setImageId(R.drawable.women);
-                friendList.add(friend1);
-                friendList.add(friend1);
-                friendList.add(friend2);
-                friendList.add(friend2);
-                friendList.add(friend1);
-                friendList.add(friend1);
-                friendList.add(friend2);
-                friendList.add(friend1);
-                friendList.add(friend1);
+                String response = okHttpConnection.postAddPost(json, "friend");
+                friendList = JSONArray.parseArray(response, Friend.class);
                 showResponse(friendList);
+//                recyclerView.setAdapter(friendAdapter);
+//                recyclerView.setLayoutManager(gridLayoutManager);
                 onCreate(null);
             }
         }).start();
@@ -70,5 +70,17 @@ public class FriendFragment extends Fragment {
                 initRecycleView(list);
             }
         });
+    }
+
+    public void init(){
+        okHttpConnection = new OkHttpConnection();
+        preferences = getActivity().getSharedPreferences("user", MODE_PRIVATE);
+        json = new JSONObject();
+        String userId = preferences.getString("userId", "");
+        String userName = preferences.getString("userName","");
+        String sex = preferences.getString("sex", "");
+        json.put("userId", userId);
+        json.put("userName", userName);
+        json.put("sex", sex);
     }
 }

@@ -1,10 +1,17 @@
 package com.xmut.hotel;
 
-public class Friend {
+public class ApplyUser {
+    private String userId;
     private String userName;
     private String sex;
-    private String userId;
-    private int imageId;
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 
     public String getUserName() {
         return userName;
@@ -20,21 +27,5 @@ public class Friend {
 
     public void setSex(String sex) {
         this.sex = sex;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-    public int getImageId() {
-        return imageId;
-    }
-
-    public void setImageId(int imageId) {
-        this.imageId = imageId;
     }
 }

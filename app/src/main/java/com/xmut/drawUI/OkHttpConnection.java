@@ -15,6 +15,7 @@ import okhttp3.Response;
 
 public class OkHttpConnection {
     private String url = "http://118.24.221.92:8080/";
+    private String local = "http://192.168.43.203:8080/";
     private OkHttpClient client;
     private Request request;
     private String responseData;
@@ -36,11 +37,11 @@ public class OkHttpConnection {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        Log.i("user", "data: "+ responseData);
         return responseData;
     }
 
-    public void postAddPost(JSONObject json, String target){
+    public String postAddPost(JSONObject json, String target){
 
         requestBody = RequestBody.create(JSON, String.valueOf(json));
 //        requestBody = new FormBody.Builder().add(json.);
@@ -48,12 +49,13 @@ public class OkHttpConnection {
 
         try {
             response = client.newCall(request).execute();
+            responseData = response.body().string();
             if(response.isSuccessful()){
-                Log.i("post", response.body().toString());
+
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        return responseData;
     }
 }

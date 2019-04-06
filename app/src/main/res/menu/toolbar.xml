@@ -9,5 +9,9 @@
         android:id="@+id/add_friend"
         android:title="添加好友"
         app:showAsAction="never"/>
+    <item
+        android:id="@+id/apply_list"
+        android:title="好友申请"
+        app:showAsAction="never"/>
 
 </menu>

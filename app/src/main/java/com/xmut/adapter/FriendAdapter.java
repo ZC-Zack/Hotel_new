@@ -57,10 +57,16 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull FriendAdapter.ViewHolder holder, int position) {
+        int image;
         Friend friend = friendList.get(position);
-        holder.friendNumber.setText(friend.getUsername());
+        holder.friendNumber.setText(friend.getUserName());
         holder.friendName.setText(friend.getUserId());
-        Glide.with(context).load(friend.getImageId()).into(holder.friendImage);
+        if("男".equals(friend.getSex())){
+            image = R.drawable.men;
+        }else{
+            image = R.drawable.women;
+        }
+        Glide.with(context).load(image).into(holder.friendImage);
     }
 
     @Override

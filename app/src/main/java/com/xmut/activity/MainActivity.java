@@ -177,6 +177,10 @@ public class MainActivity extends AppCompatActivity{
                 intent = new Intent(MainActivity.this, AddFriendActivity.class);
                 startActivity(intent);
                 break;
+            case R.id.apply_list:
+                intent = new Intent(MainActivity.this, ApplyActivity.class);
+                startActivity(intent);
+                break;
         }
         return true;
     }
