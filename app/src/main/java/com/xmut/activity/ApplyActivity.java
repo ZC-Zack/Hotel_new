@@ -57,8 +57,6 @@ public class ApplyActivity extends AppCompatActivity {
                 list = JSONArray.parseArray(response, ApplyUser.class);
                 showResponse(list);
                 //onCreate(null);
-                applyAdapter = new ApplyAdapter(list);
-                recyclerView.setAdapter(applyAdapter);
             }
         }).start();
     }
@@ -81,6 +79,8 @@ public class ApplyActivity extends AppCompatActivity {
             @Override
             public void run() {
                 initRecycleView(list);
+                applyAdapter = new ApplyAdapter(list);
+                recyclerView.setAdapter(applyAdapter);
             }
         });
     }
