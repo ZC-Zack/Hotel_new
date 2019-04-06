@@ -137,6 +137,8 @@ public class MainActivity extends AppCompatActivity{
         View view = LayoutInflater.from(this).inflate(R.layout.main_header, null);
         login_btn = view.findViewById(R.id.login_button);
         //Log.i("tof", "login_btn: " + login_btn);
+
+
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -157,6 +159,8 @@ public class MainActivity extends AppCompatActivity{
                 }
                 return false;
             }
+
+
         });
     }
 
