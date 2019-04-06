@@ -21,7 +21,7 @@ public class HomeFragment extends Fragment implements TabLayout.OnTabSelectedLis
     private HomeTabAdapter homeTabAdapter;
 
     private List<Fragment> list;
-    private String[] titles = {"酒店", "待定"};
+    private String[] titles = {"酒店", "评价"};
 
 
     @Override

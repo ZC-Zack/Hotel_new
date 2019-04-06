@@ -22,7 +22,6 @@ public class RoomActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.d("RoomActivity","111111111");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_room);
         Intent intent=getIntent();

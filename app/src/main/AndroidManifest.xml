@@ -24,6 +24,7 @@
         </activity>
         <activity android:name="com.xmut.activity.LoginActivity" />
         <activity android:name="com.xmut.activity.RegisterActivity" />
+        <activity android:name="com.xmut.activity.RoomActivity" />
     </application>
 
 </manifest>
