@@ -35,18 +35,19 @@ public class ApplyActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_apply);
+        preferences = getSharedPreferences("user", MODE_PRIVATE);
         recyclerView = findViewById(R.id.apply_recycle);
         init();
         initApply();
     }
 
     public void initRecycleView(List<ApplyUser> list){
-        applyAdapter = new ApplyAdapter(list);
+        applyAdapter = new ApplyAdapter(list, preferences);
         gridLayoutManager = new GridLayoutManager(this, 1);
         recyclerView.setAdapter(applyAdapter);
-        Log.i("user", "list:run1   "+list);
+      //  Log.i("user", "list:run1   "+list);
         recyclerView.setLayoutManager(gridLayoutManager);
-        Log.i("user", "list:run2   "+list);
+       // Log.i("user", "list:run2   "+list);
     }
 
     public void initApply(){
@@ -79,7 +80,7 @@ public class ApplyActivity extends AppCompatActivity {
             @Override
             public void run() {
                 initRecycleView(list);
-                applyAdapter = new ApplyAdapter(list);
+                applyAdapter = new ApplyAdapter(list, preferences);
                 recyclerView.setAdapter(applyAdapter);
             }
         });

@@ -1,5 +1,7 @@
 package com.xmut.drawUI;
 
+import android.content.SharedPreferences;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 
@@ -14,13 +16,14 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class OkHttpConnection {
-    private String url = "http://118.24.221.92:8080/";
-    private String local = "http://192.168.43.203:8080/";
+    //private String url = "http://118.24.221.92:8080/";
+    private String url = "http://192.168.43.203:8080/";
     private OkHttpClient client;
     private Request request;
     private String responseData;
     private Response response;
     private RequestBody requestBody;
+    private SharedPreferences sharedPreferences;
 
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
@@ -47,6 +50,23 @@ public class OkHttpConnection {
 //        requestBody = new FormBody.Builder().add(json.);
         request = new Request.Builder().url(url + target).post(requestBody).build();
 
+        try {
+            response = client.newCall(request).execute();
+            responseData = response.body().string();
+            if(response.isSuccessful()){
+
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return responseData;
+    }
+
+    public String postApplyResult(JSONObject json, String target){
+        //sharedPreferences = getgetSharedPreferences("user", MODE_PRIVATE);
+        //json.put("friendId", sharedPreferences.getString("userId", ""));
+        requestBody = RequestBody.create(JSON, String.valueOf(json));
+        request = new Request.Builder().url(url + target).post(requestBody).build();
         try {
             response = client.newCall(request).execute();
             responseData = response.body().string();

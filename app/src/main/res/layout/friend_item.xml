@@ -27,11 +27,19 @@
                 android:id="@+id/friend_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="15dp"/>
+                android:layout_margin="5dp"/>
+
+            <TextView
+                android:id="@+id/friend_apply_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"/>
+
             <TextView
                 android:id="@+id/friend_number"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"/>
         </LinearLayout>
     </LinearLayout>
 </android.support.v7.widget.CardView>
