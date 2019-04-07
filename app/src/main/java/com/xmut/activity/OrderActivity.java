@@ -32,6 +32,7 @@ public class OrderActivity extends AppCompatActivity {
 
     private void initOrder(){
         list = new ArrayList<>();
+
         order = new Order();
         order.setRoomName("测试");
         order.setImageId(R.drawable.room);

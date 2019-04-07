@@ -22,7 +22,7 @@ import com.xmut.hotel.Room;
 import java.util.Calendar;
 
 public class RoomActivity extends AppCompatActivity {
-    private EditText mEditText;
+    private EditText mEditText1,mEditText2;
     public static final String ROOM_NAME="room_name";
     public static final String ROOM_IMAGE_ID="room_image_id";
     public static final String ROOM_PRICE="room_price";
@@ -31,27 +31,6 @@ public class RoomActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_room);
-        mEditText = (EditText) findViewById(R.id.editText1);
-        mEditText.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-                    showDatePickDlg();
-                    return true;
-                }
-                return false;
-            }
-        });
-
-        mEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean b) {
-                if (b) {
-                    showDatePickDlg();
-                }
-            }
-        });
-
 
         Intent intent=getIntent();
         String roomName=((Intent) intent).getStringExtra(ROOM_NAME);
@@ -71,14 +50,67 @@ public class RoomActivity extends AppCompatActivity {
         Glide.with(this).load(roomImageId).into(roomImageView);
         String roomContent=generateFruitContent(roomPrice);
         roomContentText.setText(roomContent);
+
+        mEditText1 = (EditText) findViewById(R.id.editText1);
+        mEditText1.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+                    showDatePickDlg1();
+                    return true;
+                }
+                return false;
+            }
+        });
+
+        mEditText1.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (b) {
+                    showDatePickDlg1();
+                }
+            }
+        });
+
+        mEditText2 = (EditText) findViewById(R.id.editText2);
+        mEditText2.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+                    showDatePickDlg2();
+                    return true;
+                }
+                return false;
+            }
+        });
+
+        mEditText2.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (b) {
+                    showDatePickDlg2();
+                }
+            }
+        });
     }
 
-    protected void showDatePickDlg() {
+    protected void showDatePickDlg1() {
         Calendar calendar = Calendar.getInstance();
         DatePickerDialog datePickerDialog = new DatePickerDialog(RoomActivity.this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                RoomActivity.this.mEditText.setText(year + "年" + monthOfYear + "月" + dayOfMonth+"日");
+                RoomActivity.this.mEditText1.setText(year + "-" + monthOfYear + "-" + dayOfMonth);
+            }
+        }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+        datePickerDialog.show();
+    }
+
+    protected void showDatePickDlg2() {
+        Calendar calendar = Calendar.getInstance();
+        DatePickerDialog datePickerDialog = new DatePickerDialog(RoomActivity.this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                RoomActivity.this.mEditText2.setText(year + "-" + monthOfYear + "-" + dayOfMonth);
             }
         }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
         datePickerDialog.show();
