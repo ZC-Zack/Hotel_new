@@ -4,10 +4,17 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputType;
+import android.text.Selection;
+import android.text.Spannable;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
 import com.example.activity.R;
@@ -18,6 +25,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText accountEdit;
     private EditText passwordEdit;
     private Button login;
+    private CheckBox switchCheck;
     private CheckBox rememberPass;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +35,7 @@ public class LoginActivity extends AppCompatActivity {
         accountEdit=(EditText)findViewById(R.id.account);
         passwordEdit=(EditText)findViewById(R.id.password);
         rememberPass=(CheckBox)findViewById(R.id.remember_pass);
+        switchCheck = (CheckBox) findViewById(R.id.switch_check);
         login=(Button)findViewById(R.id.act_login_phone_loginBut);
         boolean isRemember=pref.getBoolean("remember_password",false);
         if(isRemember){
@@ -56,6 +65,19 @@ public class LoginActivity extends AppCompatActivity {
                 }else {
                     Toast.makeText(LoginActivity.this,"account or password is invalid",Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+        switchCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton ButtonView, boolean isChecked) {
+                if(isChecked){
+                    //显示密码
+                    passwordEdit.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                }else {
+                    //不显示密码
+                    passwordEdit.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                }
+                passwordEdit.setSelection(passwordEdit.getText().toString().length());
             }
         });
 

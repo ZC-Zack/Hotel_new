@@ -26,8 +26,8 @@ public class AddFriendActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_friend);
-        add_btn = findViewById(R.id.add_btn);
-        add_text = findViewById(R.id.add_text);
+        add_btn = findViewById(R.id.add_find);
+        add_text = findViewById(R.id.add_name);
         okHttpConnection = new OkHttpConnection();
         user = new User();
         preferences = getSharedPreferences("user", MODE_PRIVATE);
