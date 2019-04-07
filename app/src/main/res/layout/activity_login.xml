@@ -18,11 +18,12 @@
             android:background="@drawable/selector_lin"
             android:orientation="horizontal">
 
-            <ImageView
+            <Button
+                android:id="@+id/return_btn"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_marginLeft="5dp"
-                android:src="@drawable/login_zuojiantou" />
+                android:background="@drawable/login_zuojiantou" />
 
             <TextView
                 android:layout_width="wrap_content"

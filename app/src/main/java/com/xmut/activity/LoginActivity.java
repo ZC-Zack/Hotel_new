@@ -67,6 +67,14 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        Button returnbtn = (Button)findViewById(R.id.return_btn);
+        returnbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(LoginActivity.this,LoginActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
 
@@ -84,6 +92,7 @@ public class LoginActivity extends AppCompatActivity {
             }
             return true;
         }
+
         return super.onKeyDown(keyCode, event);
     }
 }
