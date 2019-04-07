@@ -52,19 +52,7 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.ViewHolder> 
         }
         View view = LayoutInflater.from(context).inflate(R.layout.hotel_item, parent, false);
 
-        final ViewHolder holder=new ViewHolder(view);
-        holder.cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int position=holder.getAdapterPosition();
-                Room room=roomList.get(position);
-                Intent intent=new Intent(context, RoomActivity.class);
-                intent.putExtra(RoomActivity.ROOM_NAME,room.getName());
-                intent.putExtra(RoomActivity.ROOM_IMAGE_ID,room.getImageId());
-                context.startActivity(intent);
-            }
-        });
-        return holder;
+        return new ViewHolder(view);
     }
 
     @Override

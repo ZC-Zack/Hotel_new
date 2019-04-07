@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.xmut.activity.EvaluateActivity"/>
+        <activity android:name="com.xmut.activity.MakeOrderActivity"></activity>
+        <activity android:name="com.xmut.activity.EvaluateActivity" />
         <activity android:name="com.xmut.activity.AddFriendActivity" />
         <activity android:name="com.xmut.activity.OrderActivity" />
         <activity android:name="com.xmut.activity.ApplyActivity" />

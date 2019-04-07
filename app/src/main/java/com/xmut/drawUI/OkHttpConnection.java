@@ -17,7 +17,7 @@ import okhttp3.Response;
 
 public class OkHttpConnection {
     //private String url = "http://118.24.221.92:8080/";
-    private String url = "http://192.168.43.203:8080/";
+    private String url = "http://110.80.48.196:8080/";
     private OkHttpClient client;
     private Request request;
     private String responseData;
@@ -77,5 +77,19 @@ public class OkHttpConnection {
             e.printStackTrace();
         }
         return responseData;
+    }
+
+    public void sendMassage(JSONObject json, String target){
+        requestBody = RequestBody.create(JSON, String.valueOf(json));
+        request = new Request.Builder().url(url + target).post(requestBody).build();
+        try {
+            response = client.newCall(request).execute();
+            responseData = response.body().string();
+            if(response.isSuccessful()){
+
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

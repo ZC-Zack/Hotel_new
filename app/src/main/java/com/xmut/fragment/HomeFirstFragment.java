@@ -54,15 +54,15 @@ public class HomeFirstFragment extends Fragment {
                 String response = okHttpConnection.getData("room");
                 roomList = JSONArray.parseArray(response, Room.class);
                 //Log.i("test", "roomList " + roomList.get(0).toString());
-                final Room room = new Room();
-                room.setName("测试");
-                room.setImageId(R.drawable.room);
-                room.setPrice(213);
-                roomList.add(room);
-                roomList.add(room);
-                roomList.add(room);
-                roomList.add(room);
-                roomList.add(room);
+//                final Room room = new Room();
+//                room.setName("测试");
+//                room.setImageId(R.drawable.room);
+//                room.setPrice(213);
+//                roomList.add(room);
+//                roomList.add(room);
+//                roomList.add(room);
+//                roomList.add(room);
+//                roomList.add(room);
                 showResponse(roomList);
                 onCreate(null);
             }
