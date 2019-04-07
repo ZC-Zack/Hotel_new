@@ -54,8 +54,8 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String userId = loginId.getText().toString();
                 String password = userPassword.getText().toString();
-                if (userId == null || password == null) {
-                    Toast.makeText(LoginActivity.this, "账号或者密码不能为空", Toast.LENGTH_LONG);
+                if ("".equals(userId) || "".equals(password)) {
+                    Toast.makeText(LoginActivity.this, "账号或者密码不能为空", Toast.LENGTH_LONG).show();
                 } else {
                     for (User user : userList) {
                         if (user.getUserId().equals(userId) && user.getPassword().equals(password)) {
@@ -67,7 +67,7 @@ public class LoginActivity extends AppCompatActivity {
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(intent);
                         } else {
-                            Toast.makeText(LoginActivity.this, "账号或者密码错误", Toast.LENGTH_LONG);
+                            Toast.makeText(LoginActivity.this, "账号或者密码错误", Toast.LENGTH_LONG).show();
                         }
                     }
                 }
@@ -111,7 +111,7 @@ public class LoginActivity extends AppCompatActivity {
         return super.onKeyDown(keyCode, event);
     }
 
-    public void initUsers(){
+    private void initUsers(){
         if(userList == null){
 
             new Thread(new Runnable() {

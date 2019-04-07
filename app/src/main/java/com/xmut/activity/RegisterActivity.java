@@ -7,11 +7,13 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -19,15 +21,22 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.example.activity.R;
+import com.xmut.drawUI.OkHttpConnection;
+import com.xmut.hotel.User;
 
 import java.io.File;
+import java.util.List;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
+
     private SharedPreferences pref;
     private SharedPreferences.Editor editor;
     private EditText accountEdit;
     private EditText passwordEdit;
+    private EditText passwordAgain;
     private Button login;
     private CheckBox rememberPass;
     private ImageView ivHead;//头像显示
@@ -35,6 +44,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private Button btnPhotos;//相册
     private Bitmap head;//头像Bitmap
     private static String path = "/sdcard/myHead/";
+    private List<User> userList;
+
+    private OkHttpConnection connection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +54,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_register);
         accountEdit = (EditText) findViewById(R.id.account);
         passwordEdit = (EditText) findViewById(R.id.password);
+        passwordAgain = findViewById(R.id.password_again);
+
+        initUsers();
 
         Button registerButton = (Button) findViewById(R.id.register);
         registerButton.setOnClickListener(new View.OnClickListener() {
@@ -49,11 +64,35 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             public void onClick(View v) {
                 String account = accountEdit.getText().toString();
                 String password = passwordEdit.getText().toString();
-                if (account.equals("admin") && password.equals("123456")) {
-                    Toast.makeText(RegisterActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
-
-                } else {
-                    Toast.makeText(RegisterActivity.this, "注册失败", Toast.LENGTH_SHORT).show();
+                String password_second = passwordAgain.getText().toString();
+                if("".equals(account) || "".equals(password) || "".equals(password_second)){
+                    Log.i("accout","account"+account);
+                    Toast.makeText(RegisterActivity.this, "账号或者密码不能为空", Toast.LENGTH_LONG).show();
+                }else{
+                    for(User user: userList){
+                        if(user.getUserId().equals(account)){
+                            Toast.makeText(RegisterActivity.this, "账号已被注册", Toast.LENGTH_LONG).show();
+                            break;
+                        }
+                    }
+                    if(password.equals(password_second)) {
+                        Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                        final JSONObject jsonObject = new JSONObject();
+                        jsonObject.put("userId", account);
+                        jsonObject.put("userName", account);
+                        jsonObject.put("password", password);
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                connection = new OkHttpConnection();
+                                connection.postAddPost(jsonObject, "setUser");
+                            }
+                        }).start();
+                        Toast.makeText(RegisterActivity.this, "注册成功", Toast.LENGTH_LONG).show();
+                        startActivity(intent);
+                    }else {
+                        Toast.makeText(RegisterActivity.this, "两次密码输入不同", Toast.LENGTH_LONG).show();
+                    }
                 }
             }
         });
@@ -106,6 +145,19 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 break;
                 default:
                     break;
+        }
+    }
+    private void initUsers(){
+        if(userList == null){
+
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    connection = new OkHttpConnection();
+                    String response = connection.getData("getUser");
+                    userList = JSONArray.parseArray(response, User.class);
+                }
+            }).start();
         }
     }
 }
