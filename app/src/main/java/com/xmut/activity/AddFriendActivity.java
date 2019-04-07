@@ -17,7 +17,7 @@ import com.xmut.hotel.User;
 
 public class AddFriendActivity extends AppCompatActivity {
 
-    private Button add_btn;
+    private TextView add_find;
     private TextView add_text;
     private SharedPreferences preferences;
     private User user;
@@ -26,7 +26,7 @@ public class AddFriendActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_friend);
-        add_btn = findViewById(R.id.add_find);
+        add_find = findViewById(R.id.find);
         add_text = findViewById(R.id.add_name);
         okHttpConnection = new OkHttpConnection();
         user = new User();
@@ -35,7 +35,7 @@ public class AddFriendActivity extends AppCompatActivity {
         user.setUserId(preferences.getString("userId",""));
         user.setUserName(preferences.getString("userName", ""));
         user.setSex(preferences.getString("sex", ""));
-        add_btn.setOnClickListener(new View.OnClickListener() {
+        add_find.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String friendId = add_text.getText().toString();
