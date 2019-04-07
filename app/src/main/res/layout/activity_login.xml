@@ -93,7 +93,7 @@
                 android:src="@drawable/login_user_user" />
 
             <EditText
-                android:id="@+id/act_login_phone_phoneNumberEt"
+                android:id="@+id/login_text"
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="5dp"
@@ -129,7 +129,7 @@
                 android:src="@drawable/login_user_pass" />
 
             <EditText
-                android:id="@+id/act_login_phone_phoneCodeEt"
+                android:id="@+id/password_text"
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="5dp"

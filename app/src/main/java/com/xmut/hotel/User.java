@@ -3,7 +3,7 @@ package com.xmut.hotel;
 public class User {
     private String userId;
     private String userName;
-    private String userSex;
+    private String sex;
     private int imageId;
     private String password;
 
@@ -23,12 +23,12 @@ public class User {
         this.userName = userName;
     }
 
-    public String getUserSex() {
-        return userSex;
+    public String getSex() {
+        return sex;
     }
 
-    public void setUserSex(String userSex) {
-        this.userSex = userSex;
+    public void setSex(String sex) {
+        this.sex = sex;
     }
 
     public int getImageId() {
