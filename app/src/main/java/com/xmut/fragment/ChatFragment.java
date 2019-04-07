@@ -1,6 +1,7 @@
 package com.xmut.fragment;
 
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -31,63 +32,63 @@ import java.util.List;
 import static android.content.Context.MODE_PRIVATE;
 
 public class ChatFragment extends Fragment {
+
     private View view;
     private List<Msg> msgList = new ArrayList<>();
-    private List<Chat> chatList;
 
     private static int length;
     private static final int UPDATE_TEXT = 1;
-    private static int flag = 1;
+    private static String friendFlag = "1";
 
     private EditText inputText;
     private Button send;
     private RecyclerView msgRecyclerView;
     private MsgAdapter adapter;
     private SharedPreferences preferences;
-    private User user;
+
     private OkHttpConnection connection;
     private LinearLayoutManager layoutManager;
     private JSONObject userJson;
 
 
-    final JSONObject json = new JSONObject();
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup group, Bundle bundle){
         view = inflater.inflate(R.layout.chat_layout, group, false);
+
         connection = new OkHttpConnection();
         preferences = getActivity().getSharedPreferences("user", MODE_PRIVATE);
         userJson = getUser();
-        json.put("friendId", "1");
-        json.put("userId", userJson.get("userId"));
 
-        initMsg(userJson);
+        friendFlag = (String) userJson.get("friendId");
+
+
         inputText = view.findViewById(R.id.input_text);
         send = view.findViewById(R.id.send_btn);
         msgRecyclerView = view.findViewById(R.id.chat_recycle);
         layoutManager = new LinearLayoutManager(getContext());
+
         initRecycleView(msgList);
+        MyTask myTask = new MyTask();
+        myTask.execute();
         //refreshMsg();
         send.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View v) {
                 String content = inputText.getText().toString();
-                Log.i("tag","fiendId" + preferences.getString("friendId", ""));
 
                 //showResponse(msgList);
                 //initMsg(userJson);
                 adapter.notifyDataSetChanged();
                 if(!"".equals(content)){
-                    json.put("friendId", preferences.getString("friendId", ""));
-                    json.put("userId", userJson.get("userId"));
-                    Log.i("tof", "userId: " + userJson.get("userId"));
+                    userJson.put("friendId", preferences.getString("friendId", ""));
+                    userJson.put("userId", userJson.get("userId"));
 
-                    json.put("content", content);
+                    userJson.put("content", content);
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
-                            connection.sendMassage(json, "send");
+                            connection.sendMassage(userJson, "send");
                         }
                     }).start();
 
@@ -116,43 +117,17 @@ public class ChatFragment extends Fragment {
             @Override
             public void run() {
                 connection = new OkHttpConnection();
-                do {
-
-                    try {
-                        Thread.sleep(5000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    msgList = new ArrayList<>();
-                    String response = connection.getMassage(json, "getContent");
-                    if (response != null) {
-                        msgList = JSONArray.parseArray(response, Msg.class);
-                    }
-                    if(flag == 1) {
-                        length = msgList.size();
-                        Log.i("msg", "run: " + "123");
-                        showResponse(msgList);
-                        onCreate(null);
-                        flag = 0;
-                    }else{
-                        if(length != msgList.size()) {
-                            initRecycleView(msgList);
-                            Message message = new Message();
-                            message.what = UPDATE_TEXT;
-                            handler.sendMessage(message);
-                        }
-                    }
-                }while (true);
+                msgList = new ArrayList<>();
+                String response = connection.getMassage(userJson, "getContent");
+                if (response != null) {
+                    msgList = JSONArray.parseArray(response, Msg.class);
+                }
+                length = msgList.size();
+                showResponse(msgList);
+                onCreate(null);
             }
         }).start();
-//        Msg msg1 = new Msg();
-//        msg1.setContent("测试");
-//        msg1.setType(Msg.TYPE_RECEIVED);
-//        msgList.add(msg1);
-//        Msg msg2 = new Msg();
-//        msg2.setType(Msg.TYPE_SENT);
-//        msg2.setContent("测试右边");
-//        msgList.add(msg2);
+
     }
     private void showResponse(final List<Msg> list){
         getActivity().runOnUiThread(new Runnable() {
@@ -173,53 +148,50 @@ public class ChatFragment extends Fragment {
         return json;
     }
 
-    public void refreshMsg(){
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                connection = new OkHttpConnection();
+    //Async异步传输
+    private class MyTask extends AsyncTask<String, List<Msg>, String>{
 
-                do {
-                    try {
-                        Thread.sleep(5000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    msgList = new ArrayList<>();
-                    String response = connection.getMassage(json, "getContent");
-                    if (response != null) {
-                        msgList = JSONArray.parseArray(response, Msg.class);
-                    }
-                    if(msgList.size() > length) {
-                        Log.i("msg", "run: " + "123");
+        @Override
+        protected void onPreExecute() {
+            initMsg(userJson);
+        }
 
-                        adapter.notifyDataSetChanged();
+        @Override
+        protected String doInBackground(String... strings) {
 
-//                        Message message = new Message();
-//                        message.what = UPDATE_TEXT;
-//                        handler.sendMessage(message);
-//                        adapter = new MsgAdapter(msgList);
-//                        msgRecyclerView.setAdapter(adapter);
-//                        adapter.notifyItemInserted(msgList.size() - 1);
-//                        msgRecyclerView.scrollToPosition(msgList.size() - 1);
-                    }
-//                    showResponse(msgList);
-//                    onCreate(null);
+            connection = new OkHttpConnection();
+            while(true){
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
 
-                }while (true);
-            }
-        }).start();
-    }
-    private Handler handler = new Handler(){
+                msgList = new ArrayList<>();
+                String response = connection.getMassage(userJson, "getContent");
+                if (response != null) {
+                    msgList = JSONArray.parseArray(response, Msg.class);
+                }
+                userJson.put("friendId", preferences.getString("friendId",""));
 
-        public void handleMessage(Message message){
-            switch (message.what){
-                case UPDATE_TEXT:
-                    initRecycleView(msgList);
-                    adapter.notifyItemInserted(msgList.size() - 1);
-                    msgRecyclerView.scrollToPosition(msgList.size() - 1);
-                    break;
+                publishProgress(msgList);
             }
         }
-    };
+
+        // 方法3：onProgressUpdate（）
+        // 作用：在主线程 显示线程任务执行的进度
+
+        @Override
+        protected void onProgressUpdate(List<Msg>... values) {
+            //Log.i("test", "fried:" + friendFlag);
+
+            if(msgList.size()!=length || !friendFlag.equals(userJson.getString("friendId"))){
+                showResponse(msgList);
+                onCreate(null);
+                length = msgList.size();
+                friendFlag = (String) userJson.get("friendId");
+            }
+
+        }
+    }
 }

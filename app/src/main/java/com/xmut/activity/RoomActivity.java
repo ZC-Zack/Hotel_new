@@ -9,11 +9,13 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.support.v7.widget.Toolbar;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.activity.R;
@@ -26,12 +28,17 @@ public class RoomActivity extends AppCompatActivity {
     public static final String ROOM_NAME="room_name";
     public static final String ROOM_IMAGE_ID="room_image_id";
     public static final String ROOM_PRICE="room_price";
+    private Button pay_btn;
+    private ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_room);
 
+        pay_btn = findViewById(R.id.pay);
+        imageView = findViewById(R.id.room_image_view);
+        Glide.with(this).load(R.drawable.room).into(imageView);
         Intent intent=getIntent();
         String roomName=((Intent) intent).getStringExtra(ROOM_NAME);
         String roomPrice=((Intent) intent).getStringExtra(ROOM_PRICE);
@@ -90,6 +97,15 @@ public class RoomActivity extends AppCompatActivity {
                 if (b) {
                     showDatePickDlg2();
                 }
+            }
+        });
+
+        pay_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(RoomActivity.this, "提交订单成功", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(RoomActivity.this, MainActivity.class);
+                startActivity(intent);
             }
         });
     }

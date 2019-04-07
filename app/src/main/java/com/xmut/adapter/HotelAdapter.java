@@ -62,6 +62,7 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.ViewHolder> 
                 Intent intent = new Intent(context, RoomActivity.class);
                 intent.putExtra(RoomActivity.ROOM_NAME, room.getName());
                 intent.putExtra(RoomActivity.ROOM_IMAGE_ID, room.getImageId());
+                intent.putExtra(RoomActivity.ROOM_PRICE, String.valueOf(room.getPrice()));
                 context.startActivity(intent);
             }
         });
