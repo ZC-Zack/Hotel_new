@@ -98,17 +98,19 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:textSize="18sp"
-        android:text="注册"/>
+        android:text="注册"
+        android:background="@drawable/selector_but"/>
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="100dp">
         <Button
-            android:id="@+id/login_pass"
+            android:id="@+id/return_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="right"
+            android:textSize="18sp"
             android:background="@android:color/transparent"
             android:text="返回登陆"/>
     </LinearLayout>

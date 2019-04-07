@@ -94,14 +94,6 @@ public class MainActivity extends AppCompatActivity{
 
             }
         });
-
-        login_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                intent = new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 
     public void init(){
@@ -126,14 +118,6 @@ public class MainActivity extends AppCompatActivity{
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-//        Button loginButton = (Button)findViewById(R.id.login_button);
-//        loginButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(MainActivity.this,LoginActivity.class);
-//                startActivity(intent);
-//            }
-//        });
     }
 
     public void initNavView(){

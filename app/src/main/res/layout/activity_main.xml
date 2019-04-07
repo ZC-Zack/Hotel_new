@@ -67,6 +67,5 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="left"
-        app:headerLayout="@layout/main_header"
         app:menu="@menu/main_menu"/>
 </android.support.v4.widget.DrawerLayout>

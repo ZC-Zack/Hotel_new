@@ -58,8 +58,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             }
         });
 
-        Button loginpass = (Button) findViewById(R.id.login_pass);
-        loginpass.setOnClickListener(new View.OnClickListener() {
+        Button returnlogin = (Button) findViewById(R.id.return_login);
+        returnlogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
