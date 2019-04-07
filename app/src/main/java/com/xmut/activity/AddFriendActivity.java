@@ -34,7 +34,7 @@ public class AddFriendActivity extends AppCompatActivity {
         Log.i("fra", "preferences " + preferences);
         user.setUserId(preferences.getString("userId",""));
         user.setUserName(preferences.getString("userName", ""));
-        user.setUserSex(preferences.getString("sex", ""));
+        user.setSex(preferences.getString("sex", ""));
         add_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

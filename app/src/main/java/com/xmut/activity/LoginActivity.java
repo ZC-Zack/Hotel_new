@@ -4,59 +4,75 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.alibaba.fastjson.JSONArray;
 import com.example.activity.R;
+import com.xmut.drawUI.OkHttpConnection;
+import com.xmut.hotel.User;
+
+
+import java.util.List;
 
 public class LoginActivity extends AppCompatActivity {
+
     private SharedPreferences pref;
     private SharedPreferences.Editor editor;
-    private EditText accountEdit;
-    private EditText passwordEdit;
+    private EditText loginId;
+    private EditText userPassword;
     private Button login;
     private CheckBox rememberPass;
+    private JSONArray userjson;
+    private OkHttpConnection connection;
+    private List<User> userList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        pref= PreferenceManager.getDefaultSharedPreferences(this);
-        accountEdit=(EditText)findViewById(R.id.account);
-        passwordEdit=(EditText)findViewById(R.id.password);
-        rememberPass=(CheckBox)findViewById(R.id.remember_pass);
-        login=(Button)findViewById(R.id.act_login_phone_loginBut);
+        pref = PreferenceManager.getDefaultSharedPreferences(this);
+        initUsers();
+        loginId = (EditText)findViewById(R.id.login_text);
+        userPassword = (EditText)findViewById(R.id.password_text);
+        rememberPass = (CheckBox)findViewById(R.id.remember_pass);
+        login = (Button)findViewById(R.id.act_login_phone_loginBut);
         boolean isRemember=pref.getBoolean("remember_password",false);
         if(isRemember){
             String account=pref.getString("account","");
             String password=pref.getString("password","");
-            accountEdit.setText(account);
-            passwordEdit.setText(password);
+            loginId.setText(account);
+            userPassword.setText(password);
             rememberPass.setChecked(true);
         }
         login.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View view){
-                String account=accountEdit.getText().toString();
-                String password=passwordEdit.getText().toString();
-                if(account.equals("admin")&&password.equals("123456")){
-                    editor=pref.edit();
-                    if(rememberPass.isChecked()){
-                        editor.putBoolean("remember_password",true);
-                        editor.putString("account",account);
-                        editor.putString("password",password);
-                    }else{
-                        editor.clear();
+            public void onClick(View view) {
+                String userId = loginId.getText().toString();
+                String password = userPassword.getText().toString();
+                if (userId == null || password == null) {
+                    Toast.makeText(LoginActivity.this, "账号或者密码不能为空", Toast.LENGTH_LONG);
+                } else {
+                    for (User user : userList) {
+                        if (user.getUserId().equals(userId) && user.getPassword().equals(password)) {
+                            SharedPreferences.Editor editor = getSharedPreferences("user", MODE_PRIVATE).edit();
+                            editor.putString("userId", user.getUserId());
+                            editor.putString("userName", user.getUserName());
+                            editor.putString("sex", user.getSex());
+                            editor.apply();
+                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                            startActivity(intent);
+                        } else {
+                            Toast.makeText(LoginActivity.this, "账号或者密码错误", Toast.LENGTH_LONG);
+                        }
                     }
-                    editor.apply();
-                    Intent intent=new Intent(LoginActivity.this,MainActivity.class);
-                    startActivity(intent);
-                    //finish();
-                }else {
-                    Toast.makeText(LoginActivity.this,"account or password is invalid",Toast.LENGTH_SHORT).show();
                 }
             }
+
         });
 
         Button registerButton=(Button)findViewById(R.id.act_login_reg);
@@ -93,5 +109,19 @@ public class LoginActivity extends AppCompatActivity {
             return true;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    public void initUsers(){
+        if(userList == null){
+
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    connection = new OkHttpConnection();
+                    String response = connection.getData("getUser");
+                    userList = JSONArray.parseArray(response, User.class);
+                }
+            }).start();
+        }
     }
 }
