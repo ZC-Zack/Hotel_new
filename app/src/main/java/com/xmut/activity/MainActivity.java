@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity{
 
     private BottomNavigationView  bottomNavigationView;
     private HomeFragmentAdapter homeFragmentAdapter;
-    private ViewPager viewPager;
+    private ViewPager viewPager = null;
     private MenuItem menuItem;
     List<Fragment> fragmentList;
     private Intent intent;
@@ -145,7 +145,6 @@ public class MainActivity extends AppCompatActivity{
         }else{
             login_btn.setText(userName);
         }
-
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -198,7 +197,11 @@ public class MainActivity extends AppCompatActivity{
         return true;
     }
 
-//    private void initUser(){
+    public ViewPager getViewPager() {
+        return viewPager;
+    }
+
+    //    private void initUser(){
 //        user = getSharedPreferences("user", MODE_PRIVATE).edit();
 //        user.putString("userId", "18650406827");
 //        user.putString("userName", "测试");

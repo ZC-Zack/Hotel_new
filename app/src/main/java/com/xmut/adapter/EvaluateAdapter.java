@@ -63,7 +63,6 @@ public class EvaluateAdapter extends RecyclerView.Adapter<EvaluateAdapter.ViewHo
                 context.startActivity(intent);
             }
         });
-
         return  holder;
     }
 

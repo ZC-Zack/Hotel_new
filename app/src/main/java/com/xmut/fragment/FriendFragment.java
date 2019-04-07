@@ -32,6 +32,7 @@ public class FriendFragment extends Fragment {
     private OkHttpConnection okHttpConnection;
     private SharedPreferences preferences;
     private JSONObject json;
+    private SharedPreferences.Editor editor;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup group, Bundle bundle){
@@ -43,7 +44,7 @@ public class FriendFragment extends Fragment {
         return  view;
     }
     private void initRecycleView(List<Friend> friendList){
-        friendAdapter = new FriendAdapter(friendList);
+        friendAdapter = new FriendAdapter(friendList, editor);
         gridLayoutManager = new GridLayoutManager(getContext(), 1);
         recyclerView.setAdapter(friendAdapter);
         recyclerView.setLayoutManager(gridLayoutManager);
@@ -75,6 +76,7 @@ public class FriendFragment extends Fragment {
     public void init(){
         okHttpConnection = new OkHttpConnection();
         preferences = getActivity().getSharedPreferences("user", MODE_PRIVATE);
+        editor = getActivity().getSharedPreferences("user", MODE_PRIVATE).edit();
         json = new JSONObject();
         String userId = preferences.getString("userId", "");
         String userName = preferences.getString("userName","");

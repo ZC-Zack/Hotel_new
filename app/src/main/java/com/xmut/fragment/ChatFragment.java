@@ -2,6 +2,8 @@ package com.xmut.fragment;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -33,6 +35,10 @@ public class ChatFragment extends Fragment {
     private List<Msg> msgList = new ArrayList<>();
     private List<Chat> chatList;
 
+    private static int length;
+    private static final int UPDATE_TEXT = 1;
+    private static int flag = 1;
+
     private EditText inputText;
     private Button send;
     private RecyclerView msgRecyclerView;
@@ -43,27 +49,40 @@ public class ChatFragment extends Fragment {
     private LinearLayoutManager layoutManager;
     private JSONObject userJson;
 
+
+    final JSONObject json = new JSONObject();
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup group, Bundle bundle){
         view = inflater.inflate(R.layout.chat_layout, group, false);
         connection = new OkHttpConnection();
+        preferences = getActivity().getSharedPreferences("user", MODE_PRIVATE);
         userJson = getUser();
+        json.put("friendId", "1");
+        json.put("userId", userJson.get("userId"));
+
         initMsg(userJson);
         inputText = view.findViewById(R.id.input_text);
         send = view.findViewById(R.id.send_btn);
         msgRecyclerView = view.findViewById(R.id.chat_recycle);
         layoutManager = new LinearLayoutManager(getContext());
         initRecycleView(msgList);
+        //refreshMsg();
         send.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View v) {
                 String content = inputText.getText().toString();
+                Log.i("tag","fiendId" + preferences.getString("friendId", ""));
+
+                //showResponse(msgList);
+                //initMsg(userJson);
+                adapter.notifyDataSetChanged();
                 if(!"".equals(content)){
-                    final JSONObject json = new JSONObject();
+                    json.put("friendId", preferences.getString("friendId", ""));
                     json.put("userId", userJson.get("userId"));
                     Log.i("tof", "userId: " + userJson.get("userId"));
-                    json.put("friendId", "1");
+
                     json.put("content", content);
                     new Thread(new Runnable() {
                         @Override
@@ -79,7 +98,6 @@ public class ChatFragment extends Fragment {
                     initRecycleView(msgList);
                     adapter.notifyItemInserted(msgList.size() - 1);
                     msgRecyclerView.scrollToPosition(msgList.size() - 1);
-
                     inputText.setText("");
                 }
             }
@@ -98,15 +116,33 @@ public class ChatFragment extends Fragment {
             @Override
             public void run() {
                 connection = new OkHttpConnection();
-                msgList = new ArrayList<>();
-                String response = connection.getMassage(json, "getContent");
-                if(response != null){
-                    msgList = JSONArray.parseArray(response, Msg.class);
-                    Log.i("tof", "msgList: " + msgList.toString() + "  "  + msgList.size());
-                }
+                do {
 
-                showResponse(msgList);
-                onCreate(null);
+                    try {
+                        Thread.sleep(5000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    msgList = new ArrayList<>();
+                    String response = connection.getMassage(json, "getContent");
+                    if (response != null) {
+                        msgList = JSONArray.parseArray(response, Msg.class);
+                    }
+                    if(flag == 1) {
+                        length = msgList.size();
+                        Log.i("msg", "run: " + "123");
+                        showResponse(msgList);
+                        onCreate(null);
+                        flag = 0;
+                    }else{
+                        if(length != msgList.size()) {
+                            initRecycleView(msgList);
+                            Message message = new Message();
+                            message.what = UPDATE_TEXT;
+                            handler.sendMessage(message);
+                        }
+                    }
+                }while (true);
             }
         }).start();
 //        Msg msg1 = new Msg();
@@ -130,11 +166,60 @@ public class ChatFragment extends Fragment {
     private JSONObject getUser(){
         preferences = getActivity().getSharedPreferences("user", MODE_PRIVATE);
         JSONObject json = new JSONObject();
-        Log.i("fra", "preferences " + preferences);
         json.put("userId" ,preferences.getString("userId",""));
         json.put("userName" ,preferences.getString("userName", ""));
         json.put("sex" ,preferences.getString("sex", ""));
-        json.put("friendId","1");
+        json.put("friendId", preferences.getString("friendId", ""));
         return json;
     }
+
+    public void refreshMsg(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                connection = new OkHttpConnection();
+
+                do {
+                    try {
+                        Thread.sleep(5000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    msgList = new ArrayList<>();
+                    String response = connection.getMassage(json, "getContent");
+                    if (response != null) {
+                        msgList = JSONArray.parseArray(response, Msg.class);
+                    }
+                    if(msgList.size() > length) {
+                        Log.i("msg", "run: " + "123");
+
+                        adapter.notifyDataSetChanged();
+
+//                        Message message = new Message();
+//                        message.what = UPDATE_TEXT;
+//                        handler.sendMessage(message);
+//                        adapter = new MsgAdapter(msgList);
+//                        msgRecyclerView.setAdapter(adapter);
+//                        adapter.notifyItemInserted(msgList.size() - 1);
+//                        msgRecyclerView.scrollToPosition(msgList.size() - 1);
+                    }
+//                    showResponse(msgList);
+//                    onCreate(null);
+
+                }while (true);
+            }
+        }).start();
+    }
+    private Handler handler = new Handler(){
+
+        public void handleMessage(Message message){
+            switch (message.what){
+                case UPDATE_TEXT:
+                    initRecycleView(msgList);
+                    adapter.notifyItemInserted(msgList.size() - 1);
+                    msgRecyclerView.scrollToPosition(msgList.size() - 1);
+                    break;
+            }
+        }
+    };
 }

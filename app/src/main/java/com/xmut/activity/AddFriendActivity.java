@@ -31,7 +31,6 @@ public class AddFriendActivity extends AppCompatActivity {
         okHttpConnection = new OkHttpConnection();
         user = new User();
         preferences = getSharedPreferences("user", MODE_PRIVATE);
-        Log.i("fra", "preferences " + preferences);
         user.setUserId(preferences.getString("userId",""));
         user.setUserName(preferences.getString("userName", ""));
         user.setSex(preferences.getString("sex", ""));
@@ -39,6 +38,7 @@ public class AddFriendActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String friendId = add_text.getText().toString();
+                Log.i("fra", "add_text " + friendId);
                 final JSONObject json = new JSONObject();
                 json.put("friendId", friendId);
                 json.put("userId", user.getUserId());
