@@ -14,7 +14,9 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.activity.R;
+import com.xmut.activity.EvaluateActivity;
 import com.xmut.activity.RoomActivity;
+import com.xmut.hotel.Evaluate;
 import com.xmut.hotel.Room;
 
 import java.util.List;
@@ -47,12 +49,24 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.ViewHolder> 
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if(context == null){
+        if (context == null) {
             context = parent.getContext();
         }
         View view = LayoutInflater.from(context).inflate(R.layout.hotel_item, parent, false);
+        final ViewHolder holder = new ViewHolder(view);
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int position = holder.getAdapterPosition();
+                Room room=roomList.get(position);
+                Intent intent = new Intent(context, RoomActivity.class);
+                intent.putExtra(RoomActivity.ROOM_NAME, room.getName());
+                intent.putExtra(RoomActivity.ROOM_IMAGE_ID, room.getImageId());
+                context.startActivity(intent);
+            }
+        });
 
-        return new ViewHolder(view);
+        return holder;
     }
 
     @Override
