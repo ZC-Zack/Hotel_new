@@ -92,4 +92,19 @@ public class OkHttpConnection {
             e.printStackTrace();
         }
     }
+
+    public String getMassage(JSONObject json, String target){
+        requestBody = RequestBody.create(JSON, String.valueOf(json));
+        request = new Request.Builder().url(url + target).post(requestBody).build();
+        try {
+            response = client.newCall(request).execute();
+            responseData = response.body().string();
+            if(response.isSuccessful()){
+
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return responseData;
+    }
 }

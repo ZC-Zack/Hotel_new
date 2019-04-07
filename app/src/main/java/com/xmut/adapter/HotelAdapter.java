@@ -57,10 +57,11 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+        int image = R.drawable.room;
         Room room = roomList.get(position);
         holder.hotelName.setText(room.getName());
-        //holder.hotelPrice.setText((int) hotel.getPrice());
-        Glide.with(context).load(room.getImageId()).into(holder.hotelImage);
+        holder.hotelPrice.setText(String.valueOf(room.getPrice()));
+        Glide.with(context).load(image).into(holder.hotelImage);
     }
 
     @Override
