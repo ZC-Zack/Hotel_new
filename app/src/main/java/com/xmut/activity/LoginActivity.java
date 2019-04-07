@@ -31,6 +31,7 @@ public class LoginActivity extends AppCompatActivity {
     private JSONArray userjson;
     private OkHttpConnection connection;
     private List<User> userList;
+    private SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

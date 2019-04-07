@@ -47,13 +47,17 @@ public class MainActivity extends AppCompatActivity{
     private Button login_btn;
 
     private SharedPreferences.Editor user;
+    private SharedPreferences preferences;
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        initUser();
+
+        preferences =  getSharedPreferences("user", MODE_PRIVATE);
+//        initUser();
         init();
         initNavView();
         initSlideMenu();
@@ -128,16 +132,19 @@ public class MainActivity extends AppCompatActivity{
         navigationView.setCheckedItem(R.id.comment);*/
         View headview = navigationView.inflateHeaderView(R.layout.main_header);
         login_btn =headview.findViewById(R.id.login_button);
-        Log.i("tof", "login_btn: " + login_btn);
-        login_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,LoginActivity.class);
-                startActivity(intent);
-            }
+        String userName = preferences.getString("userName", "");
+        if("".equals(userName)){
+            login_btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+                    startActivity(intent);
+                }
 
-        });
-
+            });
+        }else{
+            login_btn.setText(userName);
+        }
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -174,7 +181,9 @@ public class MainActivity extends AppCompatActivity{
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.logoff_btn:{
-                Toast.makeText(this, "退出", Toast.LENGTH_LONG).show();
+                preferences.edit().clear().commit();
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
                 break;
             }
             case R.id.add_friend:
@@ -189,12 +198,12 @@ public class MainActivity extends AppCompatActivity{
         return true;
     }
 
-    private void initUser(){
-        user = getSharedPreferences("user", MODE_PRIVATE).edit();
-        user.putString("userId", "18650406827");
-        user.putString("userName", "测试");
-        user.putString("sex", "男");
-        user.apply();
-    }
+//    private void initUser(){
+//        user = getSharedPreferences("user", MODE_PRIVATE).edit();
+//        user.putString("userId", "18650406827");
+//        user.putString("userName", "测试");
+//        user.putString("sex", "男");
+//        user.apply();
+//    }
 
 }
