@@ -21,7 +21,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.activity.R;
@@ -46,8 +45,6 @@ public class MainActivity extends AppCompatActivity{
     private NavigationView navigationView;
     private Toolbar toolbar;
     private Button login_btn;
-    private TextView login_text;
-    private View view_head;
 
     private SharedPreferences.Editor user;
 
@@ -60,8 +57,6 @@ public class MainActivity extends AppCompatActivity{
         init();
         initNavView();
         initSlideMenu();
-        view_head = navigationView.inflateHeaderView(R.layout.main_header);
-
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener(){
 
             @Override
@@ -100,6 +95,13 @@ public class MainActivity extends AppCompatActivity{
             }
         });
 
+        login_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     public void init(){
@@ -124,17 +126,33 @@ public class MainActivity extends AppCompatActivity{
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+//        Button loginButton = (Button)findViewById(R.id.login_button);
+//        loginButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+//                startActivity(intent);
+//            }
+//        });
     }
 
     public void initNavView(){
-        navigationView = findViewById(R.id.nav_view);
+         navigationView = findViewById(R.id.nav_view);
         /*navigationView.setCheckedItem(R.id.order);
         navigationView.setCheckedItem(R.id.unused);
         navigationView.setCheckedItem(R.id.pay);
         navigationView.setCheckedItem(R.id.comment);*/
-        View view = LayoutInflater.from(navigationView.getContext()).inflate(R.layout.main_header, null);
-        //login_btn = view.findViewById(R.id.login_button);
-        //login_text = view.findViewById(R.id.login_text);
+        View headview = navigationView.inflateHeaderView(R.layout.main_header);
+        login_btn =headview.findViewById(R.id.login_button);
+        Log.i("tof", "login_btn: " + login_btn);
+        login_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+                startActivity(intent);
+            }
+
+        });
 
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
