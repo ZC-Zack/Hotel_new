@@ -67,6 +67,26 @@
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="10dp"
                             android:textSize="18sp"
+                            android:text="入住时间:"/>
+                        <EditText
+                            android:id="@+id/editText1"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="10dp"
+                            android:layout_weight="1"
+                            android:layout_gravity="center_vertical"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp">
+                        <TextView
+                            android:layout_width="90dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="10dp"
+                            android:textSize="18sp"
                             android:text="入住人    :"/>
                         <EditText
                             android:id="@+id/people"
