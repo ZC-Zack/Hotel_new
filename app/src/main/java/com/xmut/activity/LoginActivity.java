@@ -25,7 +25,6 @@ public class LoginActivity extends AppCompatActivity {
     private EditText accountEdit;
     private EditText passwordEdit;
     private Button login;
-    private CheckBox switchCheck;
     private CheckBox rememberPass;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +34,6 @@ public class LoginActivity extends AppCompatActivity {
         accountEdit=(EditText)findViewById(R.id.account);
         passwordEdit=(EditText)findViewById(R.id.password);
         rememberPass=(CheckBox)findViewById(R.id.remember_pass);
-        switchCheck = (CheckBox) findViewById(R.id.switch_check);
         login=(Button)findViewById(R.id.act_login_phone_loginBut);
         boolean isRemember=pref.getBoolean("remember_password",false);
         if(isRemember){
@@ -67,20 +65,6 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
-        switchCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton ButtonView, boolean isChecked) {
-                if(isChecked){
-                    //显示密码
-                    passwordEdit.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                }else {
-                    //不显示密码
-                    passwordEdit.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                }
-                passwordEdit.setSelection(passwordEdit.getText().toString().length());
-            }
-        });
-
         Button registerButton=(Button)findViewById(R.id.act_login_reg);
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
