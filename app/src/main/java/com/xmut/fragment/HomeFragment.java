@@ -1,5 +1,6 @@
 package com.xmut.fragment;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -22,11 +23,12 @@ public class HomeFragment extends Fragment implements TabLayout.OnTabSelectedLis
 
     private List<Fragment> list;
     private String[] titles = {"酒店", "评价"};
-
+    private Activity activity;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup group, Bundle bundle){
         view = inflater.inflate(R.layout.home_layout, group, false);
+        activity = getActivity();
         init();
         return  view;
     }

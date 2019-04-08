@@ -1,5 +1,6 @@
 package com.xmut.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.activity.R;
 import com.xmut.activity.EvaluateActivity;
+import com.xmut.activity.MainActivity;
 import com.xmut.fragment.ChatFragment;
 import com.xmut.hotel.Evaluate;
 import com.xmut.hotel.Friend;
@@ -31,6 +33,8 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.ViewHolder
     private List<Friend> friendList;
     private SharedPreferences.Editor editor;
     private ViewPager viewPager;
+
+    private MainActivity activity;
 
     class ViewHolder extends RecyclerView.ViewHolder{
 
@@ -53,16 +57,18 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.ViewHolder
                     Friend friend = friendList.get(getAdapterPosition());
                     editor.putString("friendId", friend.getUserId());
                     editor.apply();
+                    viewPager.setCurrentItem(1);
 //                    viewPager.setCurrentItem(0);
                 }
             });
         }
     }
 
-    public FriendAdapter(List<Friend> list, SharedPreferences.Editor editor){
+    public FriendAdapter(List<Friend> list, SharedPreferences.Editor editor, ViewPager viewPager){
         friendList = list;
         this.editor = editor;
-//        this.viewPager = viewPager;
+        //this.activity = activity;
+        this.viewPager = viewPager;
     }
 
     @NonNull

@@ -28,6 +28,7 @@ import com.xmut.adapter.HomeFragmentAdapter;
 import com.xmut.fragment.ChatFragment;
 import com.xmut.fragment.FriendFragment;
 import com.xmut.fragment.HomeFragment;
+import com.xmut.hotel.Friend;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -106,13 +107,15 @@ public class MainActivity extends AppCompatActivity{
        /* noScrollViewPager = (NoScrollViewPager)findViewById(R.id.main_frame);
 
         noScrollViewPager.setScroll(false);*/
+       FriendFragment friendFragment = new FriendFragment();
         fragmentList = new ArrayList<>();
         fragmentList.add(new HomeFragment());
         fragmentList.add(new ChatFragment());
-        fragmentList.add(new FriendFragment());
+        fragmentList.add(friendFragment);
         homeFragmentAdapter = new HomeFragmentAdapter(getSupportFragmentManager(), fragmentList);
         viewPager.setAdapter(homeFragmentAdapter);
         viewPager.setCurrentItem(0);
+        friendFragment.setViewPager(viewPager);
     }
 
     //侧滑栏图标
