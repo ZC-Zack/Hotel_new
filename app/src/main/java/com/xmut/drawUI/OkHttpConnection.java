@@ -17,7 +17,7 @@ import okhttp3.Response;
 
 public class OkHttpConnection {
     private String url = "http://118.24.221.92:8080/";
-    //private String url = "http://110.80.48.196:8080/";
+    //private String url = "http://172.24.40.60:8080/";
     //private String url = "http://192.168.43.203:8080/";
     private OkHttpClient client;
     private Request request;

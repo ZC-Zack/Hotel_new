@@ -30,6 +30,8 @@ public class ApplyActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private GridLayoutManager gridLayoutManager;
 
+    private static int lenth;
+
     private OkHttpConnection okHttpConnection;
     private SharedPreferences preferences;
     private JSONObject json;
@@ -53,11 +55,11 @@ public class ApplyActivity extends AppCompatActivity {
         });
     }
 
-    public void initRecycleView(List<ApplyUser> list){
-        applyAdapter = new ApplyAdapter(list, preferences);
-        gridLayoutManager = new GridLayoutManager(this, 1);
-        recyclerView.setAdapter(applyAdapter);
-        recyclerView.setLayoutManager(gridLayoutManager);
+        public void initRecycleView(List<ApplyUser> list){
+            applyAdapter = new ApplyAdapter(list, preferences);
+            gridLayoutManager = new GridLayoutManager(this, 1);
+            recyclerView.setAdapter(applyAdapter);
+            recyclerView.setLayoutManager(gridLayoutManager);
     }
 
     public void initApply(){
@@ -66,10 +68,20 @@ public class ApplyActivity extends AppCompatActivity {
             public void run() {
                 String response = okHttpConnection.postAddPost(json,"getApply");
                 list = JSONArray.parseArray(response, ApplyUser.class);
+                lenth = list.size();
                 showResponse(list);
-                //onCreate(null);
+                //applyAdapter.notifyDataSetChanged();
             }
         }).start();
+    }
+
+    private void showResponse(final List<ApplyUser> list){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                initRecycleView(list);
+            }
+        });
     }
 
     public void init(){
@@ -84,17 +96,6 @@ public class ApplyActivity extends AppCompatActivity {
         json.put("sex", sex);
     }
 
-    private void showResponse(final List<ApplyUser> list){
-        this.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                initRecycleView(list);
-                applyAdapter = new ApplyAdapter(list, preferences);
-                recyclerView.setAdapter(applyAdapter);
-                recyclerView.setLayoutManager(gridLayoutManager);
-            }
-        });
-    }
 
     private class MyTask extends AsyncTask<String, List<ApplyUser>, String>{
 
@@ -106,14 +107,24 @@ public class ApplyActivity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... strings) {
+            Log.i("tag", "doInBackground1: "+ lenth);
             okHttpConnection = new OkHttpConnection();
             while (true){
                 String response = okHttpConnection.postAddPost(json,"getApply");
                 list = JSONArray.parseArray(response, ApplyUser.class);
-                applyAdapter = new ApplyAdapter(list, preferences);
-                recyclerView.setAdapter(applyAdapter);
+                if(lenth !=  list.size()){
+                    Log.i("tag", "doInBackground: "+ list.size());
+                }
+                publishProgress(list);
             }
 
         }
+
+        @Override
+        protected void onProgressUpdate(List<ApplyUser>... values) {
+            Log.i("tag", "onProgressUpdate: "+ list.size());
+        }
     }
+
+
 }

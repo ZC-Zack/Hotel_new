@@ -38,7 +38,6 @@ public class AddFriendActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String friendId = add_text.getText().toString();
-                Log.i("fra", "add_text " + friendId);
                 final JSONObject json = new JSONObject();
                 json.put("friendId", friendId);
                 json.put("userId", user.getUserId());

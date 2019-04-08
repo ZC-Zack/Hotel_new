@@ -2,6 +2,7 @@ package com.xmut.adapter;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
@@ -22,6 +23,7 @@ import com.example.activity.R;
 import com.xmut.drawUI.GetSharedPreferences;
 import com.xmut.drawUI.OkHttpConnection;
 import com.xmut.hotel.ApplyUser;
+import com.xmut.hotel.Msg;
 
 import java.util.List;
 
@@ -30,6 +32,7 @@ public class ApplyAdapter extends RecyclerView.Adapter<ApplyAdapter.ViewHolder> 
     private Context context;
     private List<ApplyUser> list;
     private SharedPreferences sharedPreferences;
+    private static int clickFlag = 0;
 
     class ViewHolder extends RecyclerView.ViewHolder{
         CardView cardView;
@@ -63,6 +66,7 @@ public class ApplyAdapter extends RecyclerView.Adapter<ApplyAdapter.ViewHolder> 
                             json.put("result", 1);
                             json.put("friendId", sharedPreferences.getString("userId", ""));
                             okHttpConnection.postApplyResult(json, "applyResult");
+                            clickFlag = 1;
                         }
                     }).start();
                 }
@@ -80,6 +84,7 @@ public class ApplyAdapter extends RecyclerView.Adapter<ApplyAdapter.ViewHolder> 
                             json.put("result", -1);
                             json.put("friendId", sharedPreferences.getString("userId", ""));
                             okHttpConnection.postApplyResult(json, "applyResult");
+                            clickFlag = 1;
                         }
                     }).start();
                 }
@@ -121,4 +126,6 @@ public class ApplyAdapter extends RecyclerView.Adapter<ApplyAdapter.ViewHolder> 
     public int getItemCount() {
         return list.size();
     }
+
+
 }
