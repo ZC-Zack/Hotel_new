@@ -1,6 +1,7 @@
 package com.xmut.activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 import com.alibaba.fastjson.JSONArray;
 import com.example.activity.R;
 import com.xmut.drawUI.OkHttpConnection;
+import com.xmut.hotel.ApplyUser;
 import com.xmut.hotel.User;
 
 
@@ -49,6 +51,9 @@ public class LoginActivity extends AppCompatActivity {
         userPassword = (EditText)findViewById(R.id.password_text);
         rememberPass = (CheckBox)findViewById(R.id.remember_pass);
         login = (Button)findViewById(R.id.act_login_phone_loginBut);
+
+        initUsers();
+
         boolean isRemember=pref.getBoolean("remember_password",false);
         if(isRemember){
             String account=pref.getString("account","");
@@ -99,6 +104,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(LoginActivity.this,MainActivity.class);
+                finish();
                 startActivity(intent);
             }
         });

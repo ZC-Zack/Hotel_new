@@ -17,7 +17,7 @@ public class HttpConnection {
     private StringBuilder response;
     private InputStream in;
 
-    private String urlController = "http://192.168.199.124:8080/";
+    private String urlController = "http://118.24.221.92:8080/";
 
     private static final String TGL="test";
     public String getTable(String data){

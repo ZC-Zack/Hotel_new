@@ -166,7 +166,7 @@ public class ChatFragment extends Fragment {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-
+                Log.i("test", friendFlag);
                 msgList = new ArrayList<>();
                 String response = connection.getMassage(userJson, "getContent");
                 if (response != null) {

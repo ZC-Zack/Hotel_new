@@ -8,6 +8,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.nfc.Tag;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.preference.PreferenceManager;
@@ -25,6 +26,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.example.activity.R;
 import com.xmut.drawUI.OkHttpConnection;
+import com.xmut.hotel.ApplyUser;
 import com.xmut.hotel.User;
 
 import java.io.File;
@@ -55,9 +57,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         accountEdit = (EditText) findViewById(R.id.account);
         passwordEdit = (EditText) findViewById(R.id.password);
         passwordAgain = findViewById(R.id.password_again);
-
         initUsers();
-
         Button registerButton = (Button) findViewById(R.id.register);
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,8 +102,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                startActivity(intent);
                 finish();
+                startActivity(intent);
             }
         });
 
@@ -160,5 +160,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             }).start();
         }
     }
+
 }
 
