@@ -59,12 +59,14 @@ public class LoginActivity extends AppCompatActivity {
         }
         login.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view) {
+                int len = 0;
                 String userId = loginId.getText().toString();
                 String password = userPassword.getText().toString();
                 if ("".equals(userId) || "".equals(password)) {
                     Toast.makeText(LoginActivity.this, "账号或者密码不能为空", Toast.LENGTH_LONG).show();
                 } else {
                     for (User user : userList) {
+                        len++;
                         if (user.getUserId().equals(userId) && user.getPassword().equals(password)) {
                             SharedPreferences.Editor editor = getSharedPreferences("user", MODE_PRIVATE).edit();
                             editor.putString("userId", user.getUserId());
@@ -73,9 +75,11 @@ public class LoginActivity extends AppCompatActivity {
                             editor.apply();
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(intent);
-                        } else {
-                            Toast.makeText(LoginActivity.this, "账号或者密码错误", Toast.LENGTH_LONG).show();
+                            break;
                         }
+                    }
+                    if(len == userList.size()) {
+                        Toast.makeText(LoginActivity.this, "账号或者密码错误", Toast.LENGTH_LONG).show();
                     }
                 }
             }
