@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
@@ -17,7 +18,7 @@ import com.xmut.hotel.User;
 
 public class AddFriendActivity extends AppCompatActivity {
 
-    private TextView add_find;
+    private Button add_find;
     private TextView add_text;
     private SharedPreferences preferences;
     private User user;
@@ -48,6 +49,7 @@ public class AddFriendActivity extends AppCompatActivity {
                         okHttpConnection.postAddPost(json, "apply");
                     }
                 }).start();
+                Toast.makeText(AddFriendActivity.this, "已发送申请", Toast.LENGTH_SHORT).show();
             }
         });
     }

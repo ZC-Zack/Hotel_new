@@ -26,22 +26,24 @@
         android:layout_height="100dp"
         android:orientation="horizontal">
 
-    <EditText
-        android:id="@+id/add_name"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dip" />
+        <EditText
+            android:id="@+id/add_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="10dip" />
         <ImageView
-            android:layout_width="30dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/search_icon"/>
-    <TextView
-        android:id="@+id/find"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="查找"
-        android:textSize="25sp"
-        />
+        <Button
+            android:id="@+id/find"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:background="#FAF8F8"
+            android:text="查找"
+            android:textSize="25sp" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -49,20 +51,23 @@
         android:layout_marginTop="30dp"
         android:orientation="horizontal">
         <ImageView
-            android:layout_width="40dp"
+            android:layout_width="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
             android:layout_height="wrap_content"
             android:src="@drawable/mine_fenxiangyouli"/>
         <TextView
             android:layout_marginLeft="30dp"
-            android:layout_width="280dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:layout_gravity="center"
             android:text="邀请好友注册"
             android:textSize="25sp"/>
         <ImageView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
             android:src="@drawable/mine_jiantou"
             android:layout_gravity="center|right"
             />
@@ -73,20 +78,23 @@
         android:layout_marginTop="30dp"
         android:orientation="horizontal">
         <ImageView
-            android:layout_width="40dp"
+            android:layout_width="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
             android:layout_height="wrap_content"
             android:src="@drawable/login_phone_uname"/>
         <TextView
             android:layout_marginLeft="30dp"
-            android:layout_width="280dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:layout_gravity="center"
             android:text="添加手机联系人"
             android:textSize="25sp"/>
         <ImageView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
             android:src="@drawable/mine_jiantou"
             android:layout_gravity="center|right"
             />
@@ -97,20 +105,23 @@
         android:layout_marginTop="30dp"
         android:orientation="horizontal">
         <ImageView
-            android:layout_width="40dp"
+            android:layout_width="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
             android:layout_height="wrap_content"
             android:src="@drawable/search_icon"/>
         <TextView
             android:layout_marginLeft="30dp"
-            android:layout_width="280dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:layout_gravity="center"
             android:text="按条件查找陌生人"
             android:textSize="25sp"/>
         <ImageView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
             android:src="@drawable/mine_jiantou"
             android:layout_gravity="center|right"
             />
@@ -121,20 +132,23 @@
         android:layout_marginTop="30dp"
         android:orientation="horizontal">
         <ImageView
-            android:layout_width="40dp"
+            android:layout_width="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
             android:layout_height="wrap_content"
             android:src="@drawable/mine_dizhi"/>
         <TextView
             android:layout_marginLeft="30dp"
-            android:layout_width="280dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:layout_gravity="center"
             android:text="查看附近的人"
             android:textSize="25sp"/>
         <ImageView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
             android:src="@drawable/mine_jiantou"
             android:layout_gravity="center|right"
             />
